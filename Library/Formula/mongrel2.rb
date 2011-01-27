@@ -9,6 +9,10 @@ class Mongrel2 <Formula
   depends_on 'zeromq'
 
   def install
+    # Mongrel2 pulls from these ENV vars instead
+    ENV['OPTFLAGS'] = "#{ENV.cflags} #{ENV.cppflags}"
+    ENV['OPTLIBS'] = ENV.ldflags
+
     system "make all"
     system "make install PREFIX=#{prefix}"
   end
